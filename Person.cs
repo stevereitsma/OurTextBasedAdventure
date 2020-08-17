@@ -24,7 +24,31 @@ namespace TextAdventure
             Console.Write(".");
 
             // read first line,  should start with R
-            return sr.ReadLine();          
+            string strLine = sr.ReadLine();
+
+            sr.Close();
+            sr.Dispose();
+
+            return strLine;           
+            
+        }
+
+        public void saveGame()
+        {
+            try
+            {
+                //wrap this in try catch for better experiences.
+                //save a file
+                StreamWriter sw = new StreamWriter("C:\\Users\\Steve\\Source\\Repos\\OurTextBasedAdventure\\Resources\\Player.txt");
+                sw.WriteLine(MyLocation.getRoomIndicator());
+                sw.Flush();
+                sw.Close();
+                sw.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 

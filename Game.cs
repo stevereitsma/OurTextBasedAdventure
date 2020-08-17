@@ -13,6 +13,7 @@ namespace TextAdventure
         Location currentLocation;
 
         public bool isDebug = false;
+        public bool isSaved = false;
         public bool isRunning = true;
         private bool _gameOver = false;
 
@@ -184,18 +185,27 @@ namespace TextAdventure
                 Console.WriteLine("'pick up X':         Attempts to pick up an item, where X is the items name.");
                 Console.WriteLine("'use X':             Attempts to use an item, where X is the items name.");
                 Console.WriteLine("'i' / 'inventory':   Allows you to see the items in your inventory.");
-               // Console.WriteLine("'d' / 'debug' :      Toggles debug mode.");
+                Console.WriteLine("'d' / 'debug' :      Toggles debug mode.");
+                Console.WriteLine("'z' / 'save':        Save the player progress.");
                 Console.WriteLine("'q' / 'quit':        Quits the game.");
                 Console.WriteLine();
                 Console.WriteLine("Directions can be input as either the full word, or the abbriviation, \ne.g. 'North or N'");
                 return;
             }
 
-            //// toggle debug mode
-            //if (command == "debug" || command == "d")
-            //{
-            //    isDebug = !isDebug;
-            //}
+            // toggle debug mode
+            if (command == "debug" || command == "d")
+            {
+                isDebug = !isDebug;
+                return;
+            }
+
+            //save player progress
+            if (command == "save" || command == "z")
+            {
+                thePlayer.saveGame();
+                return;
+            }
 
             //If statement to access the player inventory
             //This can't be changed a great deal
@@ -354,6 +364,7 @@ namespace TextAdventure
                 {
                     //currentLocation = exit.getLeadsTo();
                     currentLocation = getLocationInMap(exit.getLeadsTo());
+                    thePlayer.MyLocation = currentLocation;
                     Console.WriteLine("\nYou move " + exit.ToString() + " to the:\n");
                     showLocation();
                     return true;

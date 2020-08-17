@@ -1,1 +1,6 @@
-R2
+R6
+
+
+[ROOM] library
+[exit] West
+[exit] North
