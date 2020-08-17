@@ -12,28 +12,71 @@ namespace TextAdventure
     {
         Location currentLocation;
 
+        public bool isDebug = false;
         public bool isRunning = true;
         private bool _gameOver = false;
 
         private List<Item> inventory;
         private List<Location> Map;
 
+        private Person thePlayer;
+
+        public Game(bool isDebugIN)
+        {
+           
+            isDebug = isDebugIN;
+            setup();
+
+        }
+
         public Game()
+        {
+            setup();
+        }
+
+        private void setup()
         {
             inventory = new List<Item>();
             Map = new List<Location>();
 
-            Console.WriteLine("Welcome adventurer, prepare yourself for a fantastical journey into the unknown.");
-            Console.WriteLine("opening file for map");
+            thePlayer = new Person();
+            currentLocation = null;
+
+            Console.WriteLine("Welcome the TD adventurer, prepare yourself for a fantastical journey into the unknown.");
+            Console.Write("opening file for map");
 
             readMapFile();
 
             Console.WriteLine("Press 'h' or type 'help' for help.");
 
-            currentLocation = Map.ElementAt(0);
+            Console.WriteLine("Do you want to load saved game? (Y/N)");
+            string LoadSaveYN = Console.ReadLine();
+
+            if (LoadSaveYN.ToUpper() == "Y")
+            {
+                string savedRoom = thePlayer.LoadSavedGame(thePlayer);
+                int i = 0;
+                foreach (Location room in Map)
+                {
+
+                    if (room.getRoomIndicator() == savedRoom)
+                    {
+                        currentLocation = Map.ElementAt(i);
+                    }
+                    i++;
+                }
+                if (currentLocation is null)
+                {
+                    Console.WriteLine("unable to find location from save file!!!!");
+                }
+            }
+            // if didn't find or ask to find in player saved file.
+            if (currentLocation == null)
+            {
+                currentLocation = Map.ElementAt(0);
+            }
 
             showLocation();
-
         }
 
 
@@ -44,7 +87,7 @@ namespace TextAdventure
             try
             {
                 StreamReader sr = new StreamReader("C:\\Users\\Steve\\Source\\Repos\\OurTextBasedAdventure\\Resources\\consoleMap.txt");
-
+                if (isDebug) Console.Write(".");
 
                 // read first line,  should start with R
                 line = sr.ReadLine();
@@ -53,31 +96,34 @@ namespace TextAdventure
                 while (line != null)
                 {
                     // this is room
-                    Console.WriteLine(line);
+                    if (isDebug) Console.WriteLine(line);
                     Location tempLocation = new Location(line);
                     line = sr.ReadLine();
-
+                    if (isDebug) Console.Write(".");
 
                     // read next lines until not I
                     line = sr.ReadLine();
                     while (line.StartsWith("I"))
                     {
-                        Console.WriteLine(line);
+                        if (isDebug) Console.WriteLine(line);
                         Item tempItem = new Item(line);
                         tempLocation.addItem(tempItem);
 
                         line = sr.ReadLine();
+                        if (isDebug) Console.Write(".");
                     }
                     // read next line until not E
                     while (line != null && line.StartsWith("E"))
                     {
-                        Console.WriteLine(line);
+                        if (isDebug) Console.WriteLine(line);
                         Exit tempexit = new Exit(line);
                         tempLocation.addExit(tempexit);
                         line = sr.ReadLine();
+                        if (isDebug) Console.Write(".");
                     }
 
                     Map.Add(tempLocation);
+                    if (isDebug) Console.Write(".");
 
                     // move to next room or end of file.
 
@@ -100,6 +146,7 @@ namespace TextAdventure
             }
 
         }
+       
         public void showLocation()
         {
             Console.WriteLine("\n" + currentLocation.getTitle() + "\n");
@@ -137,11 +184,18 @@ namespace TextAdventure
                 Console.WriteLine("'pick up X':         Attempts to pick up an item, where X is the items name.");
                 Console.WriteLine("'use X':             Attempts to use an item, where X is the items name.");
                 Console.WriteLine("'i' / 'inventory':   Allows you to see the items in your inventory.");
+               // Console.WriteLine("'d' / 'debug' :      Toggles debug mode.");
                 Console.WriteLine("'q' / 'quit':        Quits the game.");
                 Console.WriteLine();
                 Console.WriteLine("Directions can be input as either the full word, or the abbriviation, \ne.g. 'North or N'");
                 return;
             }
+
+            //// toggle debug mode
+            //if (command == "debug" || command == "d")
+            //{
+            //    isDebug = !isDebug;
+            //}
 
             //If statement to access the player inventory
             //This can't be changed a great deal
