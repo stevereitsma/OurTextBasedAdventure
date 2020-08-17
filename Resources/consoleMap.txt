@@ -1,0 +1,22 @@
+R1,Front Hall, a small room with 3 doors
+I1,boots,false,size 8 leather boots worn out and muddy
+E1,west,w,R2
+E2,east,e,R3
+E3,north,n,R4
+R2,West Hall,a narrow hallway with pretty wallpaper
+I2,a sword,true,a dull sword that looks like it was recently used
+E4,west,w,R6
+E1,east,e,R1
+E5,north,n,R5
+R6,the kitchen, a good sized kitchen - there is a pot of water boiling on the stove
+I3,a pot of water,false,a brass pot full of boiling water
+E4,east,e,R2
+R5,Dining room, a dark oak table in a fancy dining room
+I4,silver serving tray,true,a fairly large and heavy pure silver serving tray
+E5,south,s,R2
+R4,Living room,a dark room with plastic on the couch and chairs
+I5,candle stick,true,silver candle stick
+E3,south,s,R1
+R3,Master bedroom,a large master bedroom with a king size bed
+I6, leather wallet, true, filled with a big wad of cash
+E2,west,w,R1

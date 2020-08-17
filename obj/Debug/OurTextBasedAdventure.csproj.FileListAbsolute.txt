@@ -1,0 +1,7 @@
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\obj\Debug\OurTextBasedAdventure.csprojAssemblyReference.cache
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\obj\Debug\OurTextBasedAdventure.csproj.CoreCompileInputs.cache
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\bin\Debug\OurTextBasedAdventure.exe.config
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\bin\Debug\OurTextBasedAdventure.exe
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\bin\Debug\OurTextBasedAdventure.pdb
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\obj\Debug\OurTextBasedAdventure.exe
+C:\Users\Steve\Source\Repos\OurTextBasedAdventure\obj\Debug\OurTextBasedAdventure.pdb
